@@ -11,13 +11,16 @@ import Missing from "./Missing";
 import NewPost from "./NewPost";
 import PostPage from "./PostPage";
 import Search from "./Search";
+import Edit from "./Edit";
 
 function App() {
   const [posts, setPosts] = useState([]);
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [postTitle, setPostTitle] = useState("");
+  const [editTitle, setEditTitle] = useState("");
   const [postBody, setPostBody] = useState("");
+  const [editBody, setEditBody] = useState("");
 
   const history = useHistory();
 
@@ -76,6 +79,27 @@ function App() {
     }
   };
 
+  const editHandler = async (id) => {
+    const datetime = format(new Date(), "dd, MMMM, yyyy pp");
+    const updatedPost = {
+      id,
+      title: editTitle,
+      datetime,
+      body: editBody,
+    };
+    try {
+      const response = await api.put(`/posts/${id}`, updatedPost);
+      setPosts(
+        posts.map((post) => (post.id === id ? { ...response.data } : post))
+      );
+      setEditTitle("");
+      setEditBody("");
+      history.push("/");
+    } catch (error) {
+      console.log(`Error: ${error.message}`);
+    }
+  };
+
   return (
     <>
       <Header />
@@ -91,6 +115,16 @@ function App() {
             postBody={postBody}
             setPostBody={setPostBody}
             submitHandler={submitHandler}
+          />
+        </Route>
+        <Route path="/edit/:id">
+          <Edit
+            posts={posts}
+            editTitle={editTitle}
+            setEditTitle={setEditTitle}
+            editBody={editBody}
+            setEditBody={setEditBody}
+            editHandler={editHandler}
           />
         </Route>
         <Route path="/post/:id">
