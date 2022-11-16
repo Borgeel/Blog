@@ -4,7 +4,7 @@ function Footer() {
   const today = new Date();
 
   return (
-    <footer className="fixed-bottom text-center bg-primary text-light">
+    <footer className="position-sticky text-center bg-dark text-light p-2 align-items-center">
       <p> Copyright &copy; {today.getFullYear()} </p>
     </footer>
   );

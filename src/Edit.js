@@ -24,10 +24,10 @@ function Edit({
     <Container>
       {editTitle && (
         <>
-          <h3 className="mt-2">New Post</h3>
+          <h3 className="mt-2">Edit Post</h3>
           <Form onSubmit={(e) => e.preventDefault()}>
             <Form.Group className="mb-3 mt-5">
-              <Form.Label htmlFor="title">Post title: </Form.Label>
+              <Form.Label htmlFor="title">Edit title: </Form.Label>
               <Form.Control
                 id="title"
                 type="text"
@@ -37,7 +37,7 @@ function Edit({
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label htmlFor="body">Post body: </Form.Label>
+              <Form.Label htmlFor="body">Edit body: </Form.Label>
               <Form.Control
                 id="body"
                 as="textarea"
@@ -50,12 +50,21 @@ function Edit({
               type="submit"
               variant="success"
               onClick={() => {
-                editHandler(id);
+                editHandler(post.id);
               }}
             >
-              Add Post
+              Edit Post
             </Button>
           </Form>
+        </>
+      )}
+      {!editTitle && (
+        <>
+          <h2>Post Not Found</h2>
+          <p>Well, that's dissapointing</p>
+          <p>
+            <Link to="/"> Visit Our Homepage </Link>
+          </p>
         </>
       )}
     </Container>

@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 function Search({ search, setSearch }) {
   const formStyle = {
     height: "50px",

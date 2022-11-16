@@ -1,20 +1,33 @@
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
-function Header() {
+import { FaLaptop, FaTabletAlt, FaMobileAlt } from "react-icons/fa";
+
+function Header({ width }) {
+  const iconColor = {
+    color: "white",
+    marginRight: "0.5rem",
+    marginLeft: "auto",
+  };
+
   return (
     <>
-      <Navbar bg="primary" variant="dark">
+      <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">Blog</Navbar.Brand>
+          <Navbar.Brand href="/">Blog</Navbar.Brand>
+          {width < 768 ? (
+            <FaMobileAlt style={iconColor} />
+          ) : width < 992 ? (
+            <FaTabletAlt style={iconColor} />
+          ) : (
+            <FaLaptop style={iconColor} />
+          )}
           <Nav className="ml-auto">
             <Nav.Link as={Link} to="/">
               Home
             </Nav.Link>
-
             <Nav.Link as={Link} to="/post">
               Post
             </Nav.Link>
-
             <Nav.Link as={Link} to="/about">
               About
             </Nav.Link>

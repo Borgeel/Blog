@@ -16,7 +16,9 @@ function PostPage({ posts, deleteHandler }) {
             <Card.Subtitle> {post.datetime} </Card.Subtitle>
             <Card.Text> {post.body} </Card.Text>
             <Link to={`/edit/${post.id}`}>
-              <Button variant="secondary">Edit Post</Button>
+              <Button variant="secondary" className="m-2">
+                Edit Post
+              </Button>
             </Link>
             <Button variant="danger" onClick={() => deleteHandler(post.id)}>
               Delete

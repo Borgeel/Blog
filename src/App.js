@@ -1,6 +1,9 @@
 import { Route, Switch, useHistory } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { format } from "date-fns";
+import useWindowSize from "./hooks/useWindowSize";
+import useAxiosFatch from "./hooks/useAxiosFetch";
+
 import api from "./api/posts";
 
 import About from "./About";
@@ -21,35 +24,28 @@ function App() {
   const [editTitle, setEditTitle] = useState("");
   const [postBody, setPostBody] = useState("");
   const [editBody, setEditBody] = useState("");
+  const { width } = useWindowSize();
 
   const history = useHistory();
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const res = await api.get("/posts");
-        setPosts(res.data);
-      } catch (error) {
-        if (error.response) {
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else {
-          console.log(`Error: ${error.message}`);
-        }
-      }
-    };
-    fetchPosts();
-  }, []);
+  const { data, fetchError, isLoading } = useAxiosFatch(
+    "http://localhost:3500/posts"
+  );
 
   useEffect(() => {
-    const filteredResults = posts.filter(
-      (post) =>
-        post.body.toLocaleLowerCase().includes(search.toLocaleLowerCase()) ||
-        post.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-    );
+    setPosts(data);
+  }, [data]);
+
+  useEffect(() => {
+    const filteredResults = posts.filter((post) => {
+      return (
+        post.body.toLowerCase().includes(search.toLowerCase()) ||
+        post.title.toLowerCase().includes(search.toLowerCase())
+      );
+    });
+
     setSearchResults(filteredResults.reverse());
-  }, [search, posts]);
+  }, [posts, search]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -102,11 +98,15 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header width={width} />
       <Search search={search} setSearch={setSearch} />
       <Switch>
         <Route exact path="/">
-          <Home posts={searchResults} />
+          <Home
+            posts={searchResults}
+            fetchError={fetchError}
+            isLoading={isLoading}
+          />
         </Route>
         <Route exact path="/post">
           <NewPost
