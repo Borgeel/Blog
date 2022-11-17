@@ -31,10 +31,16 @@
       "body": "hahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
     },
     {
-      "id": 6,
-      "title": "Dje si denis",
-      "datetime": "17, November, 2022 1:47:42 PM",
-      "body": "kAKOJEKAKOJE\n"
+      "id": 7,
+      "title": "Testing useContext",
+      "datetime": "17, November, 2022 2:07:57 PM",
+      "body": "Jes of course"
+    },
+    {
+      "id": 8,
+      "title": "Testing useContext again",
+      "datetime": "17, November, 2022 2:11:57 PM",
+      "body": "Let's see"
     }
   ]
 }

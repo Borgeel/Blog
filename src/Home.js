@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
 import DataContext from "./context/DataContext";
+import { useContext } from "react";
 import Feed from "./Feed";
 
 function Home() {

@@ -1,11 +1,10 @@
 import { Navbar, Container, Nav } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { FaLaptop, FaTabletAlt, FaMobileAlt } from "react-icons/fa";
-import { useContext } from "react";
-import DataContext from "./context/DataContext";
+import { Link } from "react-router-dom";
+import useWindowSize from "./hooks/useWindowSize";
 
 function Header() {
-  const { width } = useContext(DataContext);
+  const { width } = useWindowSize();
 
   const iconColor = {
     color: "white",

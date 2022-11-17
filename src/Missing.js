@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function Missing() {
   return (

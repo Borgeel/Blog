@@ -1,10 +1,33 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Form, Button, Container } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import DataContext from "./context/DataContext";
+import { format } from "date-fns";
+import api from "./api/posts";
 
 function NewPost() {
-  const { postBody, setPostBody, postTitle, setPostTitle, submitHandler } =
-    useContext(DataContext);
+  const [postTitle, setPostTitle] = useState("");
+  const [postBody, setPostBody] = useState("");
+  const { posts, setPosts } = useContext(DataContext);
+
+  const history = useHistory();
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    const id = posts.length ? posts[posts.length - 1].id + 1 : 1;
+    const datetime = format(new Date(), "dd, MMMM, yyyy pp");
+    const newPost = { id, title: postTitle, datetime, body: postBody };
+    try {
+      const response = await api.post("/posts", newPost);
+      const allPosts = [...posts, response.data];
+      setPosts(allPosts);
+      setPostTitle("");
+      setPostBody("");
+      history.push("/");
+    } catch (error) {
+      console.log(`Error: ${error.message}`);
+    }
+  };
 
   return (
     <Container>

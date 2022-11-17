@@ -1,14 +1,27 @@
 import React, { useContext } from "react";
-import { useParams, Link } from "react-router-dom";
 import { Card, Button, Container } from "react-bootstrap";
+import { useParams, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import api from "./api/posts";
 import DataContext from "./context/DataContext";
 
 function PostPage() {
-  const { posts, deleteHandler } = useContext(DataContext);
+  const { posts, setPosts } = useContext(DataContext);
 
   const { id } = useParams();
   const post = posts.find((post) => post.id.toString() === id);
-  console.log(post);
+  const history = useHistory();
+
+  const deleteHandler = async (id) => {
+    try {
+      await api.delete(`/posts/${id}`);
+      const postsList = posts.filter((post) => post.id !== id);
+      setPosts(postsList);
+      history.push("/");
+    } catch (error) {
+      console.log(`Error: ${error.message}`);
+    }
+  };
 
   return (
     <>
