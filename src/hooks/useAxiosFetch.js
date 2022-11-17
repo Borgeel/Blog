@@ -26,14 +26,13 @@ const useAxiosFatch = (dataUrl) => {
           setData([]);
         }
       } finally {
-        isMounted && setTimeout(() => setIsLoading(false), 2000);
+        isMounted && setIsLoading(false, 2000);
       }
     };
 
     fetchData(dataUrl);
 
     const cleanUp = () => {
-      console.log("Clean up function");
       isMounted = false;
       source.cancel();
     };

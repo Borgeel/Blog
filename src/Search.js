@@ -1,4 +1,9 @@
-function Search({ search, setSearch }) {
+import { useContext } from "react";
+import DataContext from "./context/DataContext";
+
+function Search() {
+  const { search, setSearch } = useContext(DataContext);
+
   const formStyle = {
     height: "50px",
     backgroundColor: "gray",

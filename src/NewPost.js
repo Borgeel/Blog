@@ -1,12 +1,11 @@
+import { useContext } from "react";
 import { Form, Button, Container } from "react-bootstrap";
+import DataContext from "./context/DataContext";
 
-function NewPost({
-  postBody,
-  setPostBody,
-  postTitle,
-  setPostTitle,
-  submitHandler,
-}) {
+function NewPost() {
+  const { postBody, setPostBody, postTitle, setPostTitle, submitHandler } =
+    useContext(DataContext);
+
   return (
     <Container>
       <h3 className="mt-2">New Post</h3>

@@ -1,19 +1,19 @@
-import React from "react";
-import { Container } from "react-bootstrap";
+import React, { useContext } from "react";
+import DataContext from "./context/DataContext";
 import Feed from "./Feed";
 
-function Home({ posts, fetchError, isLoading }) {
+function Home() {
+  const { searchResults, fetchError, isLoading } = useContext(DataContext);
+
   return (
     <main>
-      {/* <Container> */}
       {isLoading && <h3> Loading posts... </h3>}
       {fetchError && <h3 style={{ color: "red" }}> {fetchError} </h3>}
-      {!isLoading && !fetchError && posts.length ? (
-        <Feed posts={posts} />
+      {!isLoading && !fetchError && searchResults.length ? (
+        <Feed posts={searchResults} />
       ) : (
         <p> No posts to display. </p>
       )}
-      {/* </Container> */}
     </main>
   );
 }

@@ -8,6 +8,7 @@ function Post({ post }) {
       as={Link}
       to={`/post/${post.id}`}
       className="m-3 text-decoration-none text-dark"
+      style={{ backgroundColor: "#f2f2f2" }}
     >
       <Card.Body>
         <Card.Title> {post.title} </Card.Title>

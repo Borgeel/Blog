@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Card, Button, Container } from "react-bootstrap";
+import DataContext from "./context/DataContext";
 
-function PostPage({ posts, deleteHandler }) {
+function PostPage() {
+  const { posts, deleteHandler } = useContext(DataContext);
+
   const { id } = useParams();
   const post = posts.find((post) => post.id.toString() === id);
   console.log(post);
@@ -10,21 +13,23 @@ function PostPage({ posts, deleteHandler }) {
   return (
     <>
       {post && (
-        <Card>
-          <Card.Header as="h3"> {post.title} </Card.Header>
-          <Card.Body>
-            <Card.Subtitle> {post.datetime} </Card.Subtitle>
-            <Card.Text> {post.body} </Card.Text>
-            <Link to={`/edit/${post.id}`}>
-              <Button variant="secondary" className="m-2">
-                Edit Post
+        <Container>
+          <Card>
+            <Card.Header as="h3"> {post.title} </Card.Header>
+            <Card.Body>
+              <Card.Subtitle> {post.datetime} </Card.Subtitle>
+              <Card.Text> {post.body} </Card.Text>
+              <Link to={`/edit/${post.id}`}>
+                <Button variant="secondary" className="m-2">
+                  Edit Post
+                </Button>
+              </Link>
+              <Button variant="danger" onClick={() => deleteHandler(post.id)}>
+                Delete
               </Button>
-            </Link>
-            <Button variant="danger" onClick={() => deleteHandler(post.id)}>
-              Delete
-            </Button>
-          </Card.Body>
-        </Card>
+            </Card.Body>
+          </Card>
+        </Container>
       )}
       {!post && (
         <Container>
