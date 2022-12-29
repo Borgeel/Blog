@@ -13,17 +13,19 @@ function Search() {
   };
 
   return (
-    <form onSubmit={(e) => e.preventDefault} style={formStyle}>
-      <label htmlFor="search"></label>
-      <input
-        type="text"
-        value={search}
-        name="search"
-        placeholder="Search Posts"
-        onChange={(e) => setSearch(e.target.value)}
-        style={{ marginLeft: "8%" }}
-      />
-    </form>
+    <>
+      <form onSubmit={(e) => e.preventDefault} style={formStyle}>
+        <label htmlFor="search"></label>
+        <input
+          type="text"
+          value={search}
+          name="search"
+          placeholder="Search Posts"
+          onChange={(e) => setSearch(e.target.value)}
+          style={{ marginLeft: "8%" }}
+        />
+      </form>
+    </>
   );
 }
 

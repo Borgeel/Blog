@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const useAxiosFatch = (dataUrl) => {
+const useAxiosFetch = (dataUrl) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchError, setFetchError] = useState(null);
@@ -43,4 +43,4 @@ const useAxiosFatch = (dataUrl) => {
   return { data, fetchError, isLoading };
 };
 
-export default useAxiosFatch;
+export default useAxiosFetch;

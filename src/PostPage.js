@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Card, Button, Container } from "react-bootstrap";
+import { Card, Button, Container, Nav } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import api from "./api/posts";
